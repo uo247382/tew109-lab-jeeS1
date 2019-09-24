@@ -28,13 +28,19 @@ public class ServletPrueba extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException {
+
+		String nombre = (String) request.getParameter("NombreUsuario");
+
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<HTML>");
 		out.println("<HEAD><TITLE>Hola Mundo!</TITLE></HEAD>");
 		out.println("<BODY>");
-		out.println("Bienvenido a mi  página web!");
+		if(nombre != null){
+			out.println("<BR>Hola "+nombre+"<BR>");
+		}
+		out.println("Bienvenido a mi página web!");
 		out.println("</BODY></HTML>");
 	}
 
