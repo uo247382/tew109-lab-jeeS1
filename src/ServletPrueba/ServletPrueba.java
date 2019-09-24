@@ -2,6 +2,7 @@ package ServletPrueba;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/ServletPrueba")
 public class ServletPrueba extends HttpServlet {
+
+
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -31,6 +34,11 @@ public class ServletPrueba extends HttpServlet {
 
 		String nombre = (String) request.getParameter("NombreUsuario");
 
+		Vector listado = (Vector)request.getSession().getAttribute("listado");
+		if (listado == null){ 
+			listado = new Vector();
+		}
+
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -39,8 +47,19 @@ public class ServletPrueba extends HttpServlet {
 		out.println("<BODY>");
 		if(nombre != null){
 			out.println("<BR>Hola "+nombre+"<BR>");
+			listado.addElement(nombre);
 		}
+
+		request.getSession().setAttribute("listado",listado); 
+
 		out.println("Bienvenido a mi página web!");
+		out.println("<br>");  
+		out.println("Contigo, hoy me han visitado:<br>");    
+		for ( int i = 0 ; i < listado.size() ; i++ ){   
+			out.println("<br>"+(String)listado.elementAt(i));   
+		} 
+
+		out.println("<a href=\"index.html\">volver</a>"); 
 		out.println("</BODY></HTML>");
 	}
 
