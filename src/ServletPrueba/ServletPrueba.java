@@ -38,6 +38,16 @@ public class ServletPrueba extends HttpServlet {
 		if (listado == null){ 
 			listado = new Vector();
 		}
+		Integer contador= (Integer) getServletContext().getAttribute("contador"); 
+
+		if ( contador == null ){  
+			contador = new Integer(0);
+		} 
+		// Establecemos el contador como atributo del context bajo el nombre 
+		// contador. En caso de que ya existiera, sobreescribiría la referencia
+		// existente con la nueva.
+
+		getServletContext().setAttribute("contador",new Integer(contador.intValue()+1)); 
 
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
@@ -54,7 +64,8 @@ public class ServletPrueba extends HttpServlet {
 
 		out.println("Bienvenido a mi página web!");
 		out.println("<br>");  
-		out.println("Contigo, hoy me han visitado:<br>");    
+		out.println("Contigo, hoy me han visitado:<br>");  
+		out.println("<br><br>" + contador +" visitas");
 		for ( int i = 0 ; i < listado.size() ; i++ ){   
 			out.println("<br>"+(String)listado.elementAt(i));   
 		} 
