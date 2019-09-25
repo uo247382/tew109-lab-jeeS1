@@ -70,6 +70,7 @@ public class HolaMundoVistaServlet extends HttpServlet {
 		for ( int i = 0 ; i < listado.size() ; i++ ){   
 			out.println("<br>"+(String)listado.elementAt(i));   
 		} 
+		out.println("<br>");  
 
 		out.println("<a href=\"index.html\">volver</a>"); 
 		out.println("</BODY></HTML>");
